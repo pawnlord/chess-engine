@@ -12,8 +12,6 @@
 !inc
 !inc/*
 
-# binary
-!main.exe
 
 # this file
 !.gitignore

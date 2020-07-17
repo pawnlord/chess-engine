@@ -2,6 +2,7 @@
 #include <Unit.hpp>
 #include <Board.hpp>
 #include <sstream>
+#include <stdlib.h>
 
 int letterToNumber(char letter){
     if(letter <= 'Z'){
@@ -16,6 +17,7 @@ int letterToNumber(char letter){
 }
 
 int main(){
+    system(""); // activates ansii codes on windows
     std::vector<std::vector<char> >  board = {
         {'R','k','B','Q','K','B','k','R'},
         {'p','p','p','p','p','p','p','p'},
@@ -35,16 +37,16 @@ int main(){
         std::cin >> input;
         if(input.size() < 5){
             std::cout << "Error: not long enough (movement syntax: <NUMBER><LETTER>-<NUMBER2><LETTER2>)" << std::endl;
-        } else if(input[0] < '1' || input[0] > '8' || input[3] < '1' || input[3] > '8'){
+        } else if(input[1] < '1' || input[1] > '8' || input[4] < '1' || input[4] > '8'){
             std::cout << "Error: number needed for position (movement syntax: <NUMBER><LETTER>-<NUMBER2><LETTER2>)"<< std::endl;
-        } else if(input[1] < 'A' || ((input[1] > 'H' && input[1] < 'a') || input[1] > 'h') 
-                || input[4] < 'H' || ((input[4] > 'H' && input[4] < 'a') || input[4] > 'h') ){
+        } else if(input[0] < 'A' || ((input[0] > 'H' && input[0] < 'a') || input[0] > 'h') 
+                || input[3] < 'H' || ((input[3] > 'H' && input[3] < 'a') || input[3] > 'h') ){
             std::cout << "Error: letter (a-h) needed for position (movement syntax: <NUMBER><LETTER>-<NUMBER2><LETTER2>)"<< std::endl;
         } else if(input[2] != '-'){
             std::cout << "Error: dash needed for position (movement syntax: <NUMBER><LETTER>-<NUMBER2><LETTER2>)" << std::endl;
         } else {
-            int from_x = input[0]-'1', from_y = letterToNumber(input[1]);
-            int to_x = input[3]-'1', to_y = letterToNumber(input[4]);
+            int from_x = letterToNumber(input[0]), from_y = input[1]-'1';
+            int to_x = letterToNumber(input[3]), to_y = input[4]-'1';
             b.move(from_x, from_y, to_x, to_y);
         }
     }

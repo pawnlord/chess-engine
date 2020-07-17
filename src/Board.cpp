@@ -1,5 +1,6 @@
 #include <Board.hpp>
 #include <iostream>
+#include <sstream>
 
 Board::Board(board_info_t board_info_){
     board_info = board_info_;
@@ -15,20 +16,25 @@ Board::Board(board_info_t board_info_){
 }
 
 void Board::draw(){
-    std::vector<char> v;
+    std::vector<char> board_str;
+    std::vector<std::string> color_str;
     for(int i = 0; i < board_info.size_y; i++){
         for(int j = 0; j < board_info.size_x; j++){
-            v.push_back('.');
+            board_str.push_back('.');
+            color_str.push_back("\x1b[0m");
         }
-        v.push_back('\n');
+        board_str.push_back('\n');
+        color_str.push_back("\x1b[0m");
     }
-    v.push_back(0);
+    board_str.push_back(0);
     for(int i = 0; i < units.size(); i++){
-        v[units[i].info.x + (units[i].info.y*(board_info.size_x+1))] = units[i].identifier;
+        board_str[units[i].info.x + (units[i].info.y*(board_info.size_x+1))] = units[i].identifier;
+        color_str[units[i].info.x + (units[i].info.y*(board_info.size_x+1))] = (units[i].info.side == SIDE1) ? "\x1b[31m" : "\x1b[32m";
     }
-    for(int i = 0; i < v.size(); i++){
-        std::cout << v[i];
-        if(v[i] != '\n'){
+    for(int i = 0; i < board_str.size(); i++){
+        std::cout << color_str[i];
+        std::cout << board_str[i];
+        if(board_str[i] != '\n'){
             std::cout << "  ";
         }
     }
