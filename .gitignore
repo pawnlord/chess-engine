@@ -1,0 +1,19 @@
+# remove all
+*
+
+# main file
+!main.cpp
+
+# source
+!src
+!src/*
+
+# headers
+!inc
+!inc/*
+
+# binary
+!main.exe
+
+# this file
+!.gitignore
