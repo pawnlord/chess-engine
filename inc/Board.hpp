@@ -2,6 +2,8 @@
 #define BOARD_HPP
 #include <iostream>
 #include <Unit.hpp>
+#include <Pawn.hpp>
+#include <Rook.hpp>
 #include <vector>
 
 typedef struct{
@@ -19,7 +21,7 @@ class Board{
     
     int move(int from_x, int from_y, int to_x, int to_y);
 
-    std::vector<Unit> units;
+    std::vector<Unit*> units;
     
     private:
     board_info_t board_info;
